@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, TouchableOpacity} from 'react-native'
 import styles from '../styles/Home'
 import axios from 'axios'
+import RenderItem from './RenderItem'
 
 export default class Home extends React.Component {
 
@@ -14,28 +15,11 @@ export default class Home extends React.Component {
   }
 
   renderItem = ({item}) => {
-      return(
-        <TouchableOpacity style={styles.renderItem}
-            onPress={ () => this.props.navigate('DetailNews')}>
-
-            <Image 
-            style={styles.img}
-            source={{ uri: item.urlToImage }} />
-            
-            <View style={{ flex: 1, justifyContent: 'center' }}>
-                <Text style={styles.titleNews}> { item.title } </Text>
-            </View>
-
-        </TouchableOpacity>
-    )
+      return <RenderItem item={item} navigate={this.props.navigate} styles={styles} />
   }
 
   renderSeparator = () => {
-    return (
-            <View 
-                style={styles.renderSeparator}> 
-            </View>
-            )
+    return <View style={styles.renderSeparator}> </View>
   }
   
   componentDidMount() {
