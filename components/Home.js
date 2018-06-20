@@ -19,7 +19,11 @@ export default class Home extends React.Component {
   }
 
   renderSeparator = () => {
-    return <View style={styles.renderSeparator}> </View>
+    return (
+            <View 
+                style={styles.renderSeparator}>
+            </View>
+            )
   }
   
   componentDidMount() {
