@@ -8,7 +8,7 @@ const RenderItem = (props) => {
     return(
         <TouchableOpacity style={styles.renderItem}
             onPress={ () => navigate('DetailNews',{
-                        items : item,
+                        title : item.title,
                     }
                 )}>
 

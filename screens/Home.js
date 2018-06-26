@@ -4,7 +4,7 @@ import HomeComponent from '../components/Home'
 export default class Home extends React.Component {
 
   static navigationOptions = {
-    title : 'Home'
+    title : 'News App | Home'
   }
 
   render() {

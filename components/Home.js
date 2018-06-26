@@ -3,16 +3,11 @@ import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, TouchableOp
 import styles from '../styles/Home'
 import axios from 'axios'
 import RenderItem from './RenderItem'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setBerita } from '../store/actions' 
 
-export default class Home extends React.Component {
-
-  constructor(){
-    super()
-    this.state = {
-       berita : [],
-       isLoading : true
-    }
-  }
+class Home extends React.Component {
 
   renderItem = ({item}) => {
       return <RenderItem item={item} navigate={this.props.navigate} styles={styles} />
@@ -34,10 +29,7 @@ export default class Home extends React.Component {
     .then(resp => {
         console.log('succces')
         console.log(resp.data.articles)       
-        this.setState({
-            berita : resp.data.articles,
-            isLoading : false
-        })
+        this.props.setBerita(resp.data.articles)
     })
     .catch(err => {
         console.log(err)
@@ -46,8 +38,9 @@ export default class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      this.state.isLoading 
+      this.props.redux.isLoading 
       ?
          <View style={styles.loading}>
             <ActivityIndicator size='large' color='#330066' animating />
@@ -55,7 +48,7 @@ export default class Home extends React.Component {
       :
           <View style={styles.container}>
             <FlatList
-              data={this.state.berita}
+              data={this.props.redux.berita}
               renderItem={this.renderItem}
               keyExtractor={(item,index) => index.toString()}
               ItemSeparatorComponent={this.renderSeparator}
@@ -65,3 +58,12 @@ export default class Home extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        redux : state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({setBerita}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

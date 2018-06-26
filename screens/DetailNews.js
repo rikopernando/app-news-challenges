@@ -4,17 +4,13 @@ import DetailNewsComponent from '../components/DetailNews'
 export default class DetailNews extends React.Component {
 
     static navigationOptions = {
-        title : 'Detail News'
-    }
-
-    constructor(props){
-        super(props)
+        title : 'News App | Detail'
     }
     
     render(){
 
-        const item = this.props.navigation.getParam('items')
+        const title = this.props.navigation.getParam('title')
         
-        return <DetailNewsComponent item={item}> </DetailNewsComponent>
+        return <DetailNewsComponent title={title}> </DetailNewsComponent>
     }
 }
