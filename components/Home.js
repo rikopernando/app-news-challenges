@@ -23,8 +23,8 @@ class Home extends React.Component {
   
   componentDidMount() {
 
-    const url = 'https://newsapi.org/v2/everything?sources=bbc-sport&apiKey=faa93d5c650945a6a34a760fac8c7f90'
-   
+    const url = 'https://newsapi.org/v2/top-headlines?country=id&category=sports&apiKey=faa93d5c650945a6a34a760fac8c7f90' 
+
     axios.get(url)
     .then(resp => {
         console.log('succces')
